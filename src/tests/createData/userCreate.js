@@ -8,7 +8,7 @@ const userCreate = async () => {
       lastName: "de Jesus",
       email: "fernando@gmail.com",
       password: 'fernando1234',
-      phone: '+3454435'
+      phone: '+574549843'
     }
   )
 

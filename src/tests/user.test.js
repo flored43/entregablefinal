@@ -10,7 +10,7 @@ const user = {
   lastName: 'Rivera',
   email: 'rene@gmail.com',
   password: 'rene1234',
-  phone: '+231321'
+  phone: '+571231321'
 }
 
 beforeAll(async () => {
