@@ -3,8 +3,8 @@ const request = require("supertest")
 const app = require("../app")
 const Category = require("../models/Category")
 
-//gets (soin publicos)
-//todos los demas son 
+//gets are Publics
+//todos los demas son(The others are private)
 
 const URL_BASE_USER = '/users/login'
 const URL_BASE = '/products'
@@ -26,9 +26,8 @@ beforeAll(async () => {
 
   TOKEN = res.body.token
 
-
-  //creacion de los registros de primera instancia para el modelo de category
-  category = await Category.create({ name: "Tecnologia" })
+  // Create the register, in the first instance for Category model
+  category = await Category.create({ name: "Technologia" })
 
   product = {
     title: "Pendrive 64gb",
