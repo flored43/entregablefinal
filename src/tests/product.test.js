@@ -3,8 +3,8 @@ const request = require("supertest")
 const app = require("../app")
 const Category = require("../models/Category")
 
-//gets are Publics
-//todos los demas son(The others are private)
+//gets (soin publicos)😊
+//todos los demas son 🔐
 
 const URL_BASE_USER = '/users/login'
 const URL_BASE = '/products'
@@ -26,8 +26,9 @@ beforeAll(async () => {
 
   TOKEN = res.body.token
 
-  // Create the register, in the first instance for Category model
-  category = await Category.create({ name: "Technologia" })
+
+  //creacion de los registros de primera instancia para el modelo de category
+  category = await Category.create({ name: "Tecnologia" })
 
   product = {
     title: "Pendrive 64gb",
@@ -56,7 +57,7 @@ test("GET -> 'URL_BASE', should return status code 200, res.body to be defined a
   const res = await request(app)
     .get(URL_BASE)
 
-  console.log(res.body)
+
   expect(res.status).toBe(200)
   expect(res.body).toBeDefined()
   expect(res.body).toHaveLength(1)
@@ -87,7 +88,6 @@ test("GET -> 'URL_BASE/:productId', should return status code 200, res.body to b
   const res = await request(app)
     .get(`${URL_BASE}/${productId}`)
 
-  console.log(res.body);
 
   expect(res.status).toBe(200)
   expect(res.body).toBeDefined()

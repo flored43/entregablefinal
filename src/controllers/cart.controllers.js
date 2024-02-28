@@ -2,6 +2,7 @@ const catchError = require('../utils/catchError');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const ProductImg = require('../models/ProductImg');
 
 const getAll = catchError(async (req, res) => {
   const userId = req.user.id
@@ -12,10 +13,41 @@ const getAll = catchError(async (req, res) => {
       {
         model: Product,
         attributes: { exclude: ["updatedAt", "createdAt"] },
-        include: {
-          model: Category,
-          attributes: ['name']
-        }
+        include: [
+          {
+            model: Category,
+            attributes: ['name']
+          },
+          {
+            model: ProductImg
+          }
+        ]
+      }
+    ]
+
+  });
+  return res.json(results);
+});
+
+const getOne = catchError(async (req, res) => {
+  const { id } = req.params
+  const userId = req.user.id
+  const results = await Cart.findByPk(id, {
+    where: { userId },
+    include: [
+      // Product
+      {
+        model: Product,
+        attributes: { exclude: ["updatedAt", "createdAt"] },
+        include: [
+          {
+            model: Category,
+            attributes: ['name']
+          },
+          {
+            model: ProductImg
+          }
+        ],
       }
     ]
 
@@ -43,6 +75,8 @@ const update = catchError(async (req, res) => {
   const userId = req.user.id
   const { id } = req.params;
   const { quantity } = req.body
+
+
   const result = await Cart.update(
     { quantity },
     { where: { id, userId }, returning: true }
@@ -53,6 +87,7 @@ const update = catchError(async (req, res) => {
 
 module.exports = {
   getAll,
+  getOne,
   create,
   remove,
   update
