@@ -14,7 +14,7 @@ let bodyCart
 
 beforeAll(async () => {
 
-  //inicio de sesion
+  //Login 
   const user = {
     email: "fernando@gmail.com",
     password: 'fernando1234'
@@ -50,6 +50,7 @@ beforeAll(async () => {
 
 })
 
+// Create 
 test("POST -> URL_PURCHASE, should return status code 201, res.body to be defined and res.body.quantity  === bodyCart.quantity", async () => {
   const res = await supertest(app)
     .post(URL_PURCHASE)
@@ -61,6 +62,7 @@ test("POST -> URL_PURCHASE, should return status code 201, res.body to be define
   expect(res.body[0].quantity).toBe(bodyCart.quantity)
 })
 
+// Get 
 test("GET -> URL_PURCHASE, should return status code 200, res.body to be defined and res.body.length === 1", async () => {
   const res = await supertest(app)
     .get(URL_PURCHASE)

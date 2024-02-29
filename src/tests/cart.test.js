@@ -45,6 +45,7 @@ beforeAll(async () => {
 
 })
 
+// create
 test("POST -> 'URL_BASE', should return status code 201, res.body to be de defined and res.body.quantity === bodyCart.quantity", async () => {
   const res = await request(app)
     .post(URL_BASE)
@@ -58,6 +59,7 @@ test("POST -> 'URL_BASE', should return status code 201, res.body to be de defin
   expect(res.body.userId).toBe(userId)
 })
 
+// Get
 test("GET -> 'URL_BASE', should status 200, res.body to be defined and res.body.length === 1", async () => {
   const res = await request(app)
     .get(URL_BASE)
@@ -76,7 +78,7 @@ test("GET -> 'URL_BASE', should status 200, res.body to be defined and res.body.
 
 })
 
-
+// Get one
 test("GET -> 'URL_BASE/:id', should status 200, res.body to be defined and res.body.quantity === bodyCart.quantity", async () => {
   const res = await request(app)
     .get(`${URL_BASE}/${cartId}`)
@@ -93,6 +95,7 @@ test("GET -> 'URL_BASE/:id', should status 200, res.body to be defined and res.b
   expect(res.body.productId).toBe(product.id)
 })
 
+// Update
 test("PUT -> 'URL_BASE/:id' should return status code 200, res.body to be defined, and res.body.quantity to Be 3", async () => {
 
   const res = await request(app)
@@ -105,6 +108,7 @@ test("PUT -> 'URL_BASE/:id' should return status code 200, res.body to be define
   expect(res.body.quantity).toBe(3)
 })
 
+// Delete
 test("DELETE -> 'URL_BASE/:id' should return status code 204", async () => {
   const res = await request(app)
     .delete(`${URL_BASE}/${cartId}`)

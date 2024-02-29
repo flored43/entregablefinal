@@ -10,7 +10,7 @@ const user = {
   lastName: 'Rivera',
   email: 'rene@gmail.com',
   password: 'rene1234',
-  phone: '+571231321'
+  phone: '+573123133521'
 }
 
 beforeAll(async () => {
@@ -29,6 +29,7 @@ beforeAll(async () => {
 
 })
 
+// get
 test("GET -> 'URL_BASE', should return status code 200, res.body to be defined and res.body.length === 1", async () => {
   const res = await request(app)
     .get(URL_BASE)
@@ -39,6 +40,7 @@ test("GET -> 'URL_BASE', should return status code 200, res.body to be defined a
   expect(res.body).toHaveLength(1)
 })
 
+// Create
 test("POST -> 'URL_BASE', should return status code 201, res.body to be defined and res.body.firstName === user.firstName ", async () => {
 
   const res = await request(app)
@@ -53,6 +55,7 @@ test("POST -> 'URL_BASE', should return status code 201, res.body to be defined 
 
 })
 
+// update
 test("PUT -> 'URL_BASE/:id', should return status code 200, res.body to be defined and res.body.firstName = 'Frednerys'", async () => {
 
   const res = await request(app)
@@ -66,6 +69,7 @@ test("PUT -> 'URL_BASE/:id', should return status code 200, res.body to be defin
 
 })
 
+// login
 test("POST -> 'URL_BASE/login', should return status code 200, res.body to be defined, res.body.user.email === user.email, and res.body.token to be defined", async () => {
   const userLogin = {
     email: 'rene@gmail.com',
@@ -95,6 +99,7 @@ test("POST -> 'URL_BASE/login', should return status code 401", async () => {
   expect(res.statusCode).toBe(401)
 })
 
+// delete
 test("DELETE -> 'URL_BASE/:id', should return status code 204", async () => {
   const res = await request(app)
     .delete(`${URL_BASE}/${userId}`)

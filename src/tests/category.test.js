@@ -23,6 +23,7 @@ beforeAll(async () => {
   TOKEN = res.body.token
 })
 
+// Get all
 test("POST -> 'URL_BASE', should return status code 201, res.body to be defined and res.body.name === category.name", async () => {
   const res = await request(app)
     .post(URL_BASE)
@@ -36,6 +37,7 @@ test("POST -> 'URL_BASE', should return status code 201, res.body to be defined 
   expect(res.body.name).toBe(category.name)
 })
 
+// Get
 test("GET -> 'URL_BASE/categories', should return status code 200, res.body to be defined and res.body to have lenght === 1", async () => {
   const res = await request(app)
     .get(URL_BASE)
@@ -45,6 +47,7 @@ test("GET -> 'URL_BASE/categories', should return status code 200, res.body to b
   expect(res.body).toHaveLength(1)
 })
 
+// Delete or Remove
 test("Delete -> 'URL_BASE/:id', should return status code 204", async () => {
   const res = await request(app)
     .delete(`${URL_BASE}/${categoryId}`)

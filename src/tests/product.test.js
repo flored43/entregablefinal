@@ -3,8 +3,8 @@ const request = require("supertest")
 const app = require("../app")
 const Category = require("../models/Category")
 
-//gets (soin publicos)😊
-//todos los demas son 🔐
+//gets (soin publicos) || Publics
+//todos los demas son || All other are priate
 
 const URL_BASE_USER = '/users/login'
 const URL_BASE = '/products'
@@ -27,7 +27,8 @@ beforeAll(async () => {
   TOKEN = res.body.token
 
 
-  //creacion de los registros de primera instancia para el modelo de category
+ 
+  // Create items in the first instance for the category model
   category = await Category.create({ name: "Tecnologia" })
 
   product = {
@@ -39,6 +40,7 @@ beforeAll(async () => {
 
 })
 
+// Create
 test("POST -> 'URL_BASE', should return status code 201, res.body to  be defined and res.body.title === product.title", async () => {
   const res = await request(app)
     .post(URL_BASE)
@@ -52,6 +54,7 @@ test("POST -> 'URL_BASE', should return status code 201, res.body to  be defined
   expect(res.body.title).toBe(product.title)
 })
 
+// Get All
 test("GET -> 'URL_BASE', should return status code 200, res.body to be defined and res.body.length === 1", async () => {
 
   const res = await request(app)
@@ -68,6 +71,8 @@ test("GET -> 'URL_BASE', should return status code 200, res.body to be defined a
 
 })
 
+
+// Get All
 test("GET -> 'URL_BASE', should return status code 200, res.body to be defined, and res.body.length ==== 1, res.body[0].categoryId === category.id , and res.body[0].category.id === category.id", async () => {
   const res = await request(app)
     .get(`${URL_BASE}?category=${category.id}`)
@@ -84,6 +89,7 @@ test("GET -> 'URL_BASE', should return status code 200, res.body to be defined, 
 
 })
 
+// Get one
 test("GET -> 'URL_BASE/:productId', should return status code 200, res.body to be defined, res.body.title === product.title, res.body.category.id to be defined, and res.body.category.id === category.id", async () => {
   const res = await request(app)
     .get(`${URL_BASE}/${productId}`)
@@ -101,6 +107,7 @@ test("GET -> 'URL_BASE/:productId', should return status code 200, res.body to b
 
 })
 
+// Update
 test("PUT -> 'URL_BASE/productId', should return status code 200, res.body to be defined and res.body.title === 'Ropa'", async () => {
 
   const res = await request(app)
@@ -114,6 +121,7 @@ test("PUT -> 'URL_BASE/productId', should return status code 200, res.body to be
 
 })
 
+// Delete / Remove
 test("DELETE -> 'URL_BASE/:productId', should return status code 204", async () => {
   const res = await request(app)
     .delete(`${URL_BASE}/${productId}`)
